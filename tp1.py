@@ -20,11 +20,13 @@ PTO = 0 #Porcentaje de tiempo ocsiosos
 PEC = 0 #Porcentade de espera en cola
 PPS = 0 #Promedio de permanencia en el sistema
 TPS = HighValue   #Tiempo para proxima salida
-colaIA=[10, 20, 120, 30, 61, 11, 9]
-colaTA=[30, 30, 20, 40, 80, 10, 13]
+colaIA=[9, 11, 61, 30, 120, 20, 10]
+colaTA=[13, 10, 80, 40, 20, 30, 30]
+
 
 def ImprimirVariables(Evento):
     global T, NS, NT, TPLL, TPS, STLL, STS, PPS, ITO, STO, TF
+    procesarSimulacion()
     print "|-Evento= "+Evento
     print "|-  T   |  NS  |  NT  | TPLL |  TPS | STLL |  STS |  PPS |  ITO |  STO |  TF "
     print "|-"+str(T).center(6," ")+"|"+str(NS).center(6," ")+"|"+str(NT).center(6," ")+"|"+str(TPLL).center(6," ")+"|"+str(TPS).center(6," ")+"|"+str(STLL).center(6," ")+"|"+str(STS).center(6," ")+"|"+str(PPS).center(6," ")+"|"+str(ITO).center(6," ")+"|"+str(STO).center(6," ")+"|"+str(TF).center(6," ")
@@ -84,24 +86,29 @@ def hacerRutina():
     else:
         hacerUnaSalida()
 
-
 def procesarSimulacion():
     global PPS,PEC,PTO
-    PPS = (STS-STLL) / NT
-    PEC = (STS-STLL-STA) / NT
-    PTO = (STO * 100) / T
-
+    if NT:
+    	PPS = (STS-STLL) / NT
+    	PEC = (STS-STLL-STA) / NT
+    else:
+    	PPS=0
+    	PEC=0
+    if T:
+    	PTO = (STO * 100) / T
+    else:
+    	PTO=0
 
 def simular():
     while T <= TF:
         hacerRutina()
 
 #MAIN
+ImprimirVariables("Empiezo")
 simular()
 while NS > 0:
     TPLL=HighValue
     hacerRutina()
-
 
 procesarSimulacion()
 ImprimirVariables("Finalizar")

@@ -80,13 +80,14 @@ def procesarSimulacion():
 Vaciamiento=False
 while Sigo:
     if T <= TF or Vaciamiento:
+    	ImprimirVariables("Principio")
         if TPLL <= TPS:
             T=TPLL
             IntervaloArribo = DameIntervaloDeArribo() #Aca deberia generar el intervalo segun la tabla
             TPLL = T+IntervaloArribo
             if not Arrepentimiento(NS):
                 NS = NS + 1
-                ImprimirVariables("Llegada")
+                #ImprimirVariables("Llegada")
                 if NS == 1:
                     STO = STO + (T - ITO)
                     TiempoAtencion = DameTiempoAtencion() #Aca deberia generar el intervalo segun la tabla
@@ -96,7 +97,7 @@ while Sigo:
         else:
             T = TPS
             NS = NS - 1
-            ImprimirVariables("Salida")
+            #ImprimirVariables("Salida")
             if NS==0:
             	Vaciamiento=False
             if NS >= 1:

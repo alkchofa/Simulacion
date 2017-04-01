@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import random
 
 class Tp1:
 
@@ -50,7 +51,7 @@ class Tp1:
 				self.SumatoriaArrepentimientos += 1
 				return True
 			else:
-				if rand <= 0.4:
+				if random.uniform(0,1.0) <= 0.4:
 					return False
 				else:
 					if self.NS == 6: #Esto es igual a 6, porque NS es la suma de la persona a la que atienen mas la de la cola
